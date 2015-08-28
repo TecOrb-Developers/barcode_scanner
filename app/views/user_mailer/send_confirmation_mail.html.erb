@@ -1,0 +1,3 @@
+<p>
+ <%= link_to "Click here to activate your account", user_confirmation_url(:confirmation_token => @user.confirmation_token), :controller => "users", :action => "user_confirmation"%>
+</p>
