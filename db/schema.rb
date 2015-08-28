@@ -11,13 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20150827131414) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -27,7 +24,6 @@ ActiveRecord::Schema.define(version: 20150827131414) do
     t.datetime "updated_at",  null: false
   end
 
-
   create_table "devices", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -35,15 +31,6 @@ ActiveRecord::Schema.define(version: 20150827131414) do
   end
 
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
-
-
-  create_table "social_authentications", force: :cascade do |t|
-    t.string   "provider_name"
-    t.integer  "uid"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
 
   create_table "infos", force: :cascade do |t|
     t.string   "page_name"
@@ -73,7 +60,14 @@ ActiveRecord::Schema.define(version: 20150827131414) do
 
   add_index "preventives", ["member_id"], name: "index_preventives_on_member_id", using: :btree
   add_index "preventives", ["user_id"], name: "index_preventives_on_user_id", using: :btree
-   
+
+  create_table "social_authentications", force: :cascade do |t|
+    t.string   "provider_name"
+    t.integer  "uid"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   add_index "social_authentications", ["user_id"], name: "index_social_authentications_on_user_id", using: :btree
 
