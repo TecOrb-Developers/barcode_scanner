@@ -12,7 +12,23 @@ post '/access_code'=>"password_resets#access_code"
 post '/update_password'=>"password_resets#update_password"
 post '/log_out'=>"sessions#log_out"
 post '/social_auth'=>"session#social_auth"
+
+
 resources :password_resets
+
+post '/my_profile' => "users#my_profile"
+post '/edit_profile' => "users#edit_profile"
+post '/add_member' => "members#add_member"
+post '/manage_profile'=> "members#manage_profile"
+post '/select_member' => "members#select_member"
+post '/edit_member' => "members#edit_member"
+post '/remove_member' => "members#remove_member"
+post '/add_preventive' => "preventives#add_preventive"
+post '/remove_preventive' => "preventives#remove_preventive"
+post '/contact_us' => "infos#contact_us"
+get  '/about_us' => "infos#about_us"
+get  '/terms_conditions' => "infos#terms_conditions"
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

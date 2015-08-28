@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827065711) do
+
+ActiveRecord::Schema.define(version: 20150827131414) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "subject"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
 
   create_table "devices", force: :cascade do |t|
     t.integer  "user_id"
@@ -24,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150827065711) do
 
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
+
   create_table "social_authentications", force: :cascade do |t|
     t.string   "provider_name"
     t.integer  "uid"
@@ -31,6 +44,36 @@ ActiveRecord::Schema.define(version: 20150827065711) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "infos", force: :cascade do |t|
+    t.string   "page_name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string   "name"
+    t.date     "dob"
+    t.string   "image"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
+
+  create_table "preventives", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "preventives", ["member_id"], name: "index_preventives_on_member_id", using: :btree
+  add_index "preventives", ["user_id"], name: "index_preventives_on_user_id", using: :btree
+   
 
   add_index "social_authentications", ["user_id"], name: "index_social_authentications_on_user_id", using: :btree
 
@@ -49,8 +92,12 @@ ActiveRecord::Schema.define(version: 20150827065711) do
     t.boolean  "status"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "image"
   end
 
   add_foreign_key "devices", "users"
+  add_foreign_key "members", "users"
+  add_foreign_key "preventives", "members"
+  add_foreign_key "preventives", "users"
   add_foreign_key "social_authentications", "users"
 end

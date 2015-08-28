@@ -1,5 +1,6 @@
 class UserMailer < ApplicationMailer
-	default from: "no-reply@ashish.mittal"
+
+	default from: "no-reply@barcode"
 	
 	def send_confirmation_mail(user)
      @user = user
@@ -8,6 +9,8 @@ class UserMailer < ApplicationMailer
 
   def password_reset(user)
     @user = user
-    mail(:to => user.email, :subject => "password reset",:from=>"ashish.mittal")
+
+    mail(:to => user.email, :subject => "password reset",:from=>"barcode")
+
   end
 end

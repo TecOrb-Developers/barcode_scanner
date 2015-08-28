@@ -1,13 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-
-  provider_name: MyString
-  uid: 1
-  user_id: 
+  page_name: MyString
+  description: MyText
 
 two:
-  provider_name: MyString
-  uid: 1
-
-  user_id: 
+  page_name: MyString
+  description: MyText

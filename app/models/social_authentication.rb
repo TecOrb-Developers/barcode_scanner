@@ -1,6 +1,7 @@
 class SocialAuthentication < ActiveRecord::Base
   belongs_to :user
 
+
   def self.user_authentication_from_socialmedia provider,uid
     user = where("uid = ? and provider_name = ?",uid,provider_name)
     if user.present?
