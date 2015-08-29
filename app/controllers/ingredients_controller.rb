@@ -4,7 +4,6 @@ def ingredients_list
 	# @user = User.find_by_id(params[:id])
     # @member = @user.members.all
     @response = User.get_ingredients(params[:upc])
-    p"++++++++++++++++++++#{inspect.@response}******************"
     render :json => {
 	        	                :response_code => 200,
 	        	                :response_message => "ingrdients list"  ,
