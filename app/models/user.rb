@@ -46,11 +46,8 @@ class User < ActiveRecord::Base
         UserMailer.password_reset(self).deliver
       end
 
-    # def self.factual_test
-    #   require 'factual'
-    #   factual = Factual.new("0Y9NkNE1YQhEmraq0W84bfeXGbTjzwarhQsDxdKM","ZIG4MzlCtXii8kZ8LlcxMRdCbmxJZV6nIvgOgD3B")
-    #   factual.table("products-cpg")#.read("http://api.v3.factual.com/t/products-cpg-nutrition?q=047400511446").rows
-      
-    # end
-
-  end
+    def self.get_ingredients upc
+     @consumer =  OAuth::AccessToken.new(OAuth::Consumer.new("0Y9NkNE1YQhEmraq0W84bfeXGbTjzwarhQsDxdKM", "ZIG4MzlCtXii8kZ8LlcxMRdCbmxJZV6nIvgOgD3B"))
+     @consumer.get("http://api.v3.factual.com/t/products-cpg-nutrition?q=#{upc}")
+    end
+end
