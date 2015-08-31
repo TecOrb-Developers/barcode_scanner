@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-
+ 
   has_many :devices, dependent: :destroy
   has_many :social_authentications , dependent: :destroy
   has_many :members , dependent: :destroy
   has_many :preventives , dependent: :destroy
+  has_many :ingredients , dependent: :destroy
 	validates :name, :presence=>true
 
 	validates :email, :presence=>true,:uniqueness=>true
@@ -46,11 +47,8 @@ class User < ActiveRecord::Base
         UserMailer.password_reset(self).deliver
       end
 
-    # def self.factual_test
-    #   require 'factual'
-    #   factual = Factual.new("0Y9NkNE1YQhEmraq0W84bfeXGbTjzwarhQsDxdKM","ZIG4MzlCtXii8kZ8LlcxMRdCbmxJZV6nIvgOgD3B")
-    #   factual.table("products-cpg")#.read("http://api.v3.factual.com/t/products-cpg-nutrition?q=047400511446").rows
-      
-    # end
-
-  end
+    def self.get_ingredients upc
+     @consumer =  OAuth::AccessToken.new(OAuth::Consumer.new("0Y9NkNE1YQhEmraq0W84bfeXGbTjzwarhQsDxdKM", "ZIG4MzlCtXii8kZ8LlcxMRdCbmxJZV6nIvgOgD3B"))
+     @consumer.get("http://api.v3.factual.com/t/products-cpg-nutrition?q=#{upc}")
+    end
+end

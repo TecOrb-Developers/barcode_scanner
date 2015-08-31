@@ -14,10 +14,10 @@ class PreventivesController < ApplicationController
 				@preventive = @user.preventives.create(:name => params[:name])
 				if @preventive.id != nil
 					render :json => {
-	                            :response_code => 200,
-	                            :response_message => @msg,
-	                            :user => @user.as_json(:only=>[:id,:name,:image,:DOB]),
-	                            :preventives => @user.preventives.as_json(:only =>[:id,:name])                     
+	                          :response_code => 200,
+	                          :response_message => @msg,
+	                          :user => @user.as_json(:only=>[:id,:name,:image,:DOB]),
+	                          :preventives => @user.preventives.as_json(:only =>[:id,:name])                     
 	                          }
 	            else
 	            	render :json => {
@@ -71,5 +71,4 @@ class PreventivesController < ApplicationController
 		                    }
 		end
 	end
-
 end
