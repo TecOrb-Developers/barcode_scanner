@@ -26,6 +26,8 @@ post '/contact_us' => "infos#contact_us"
 get  '/about_us' => "infos#about_us"
 get  '/terms_conditions' => "infos#terms_conditions"
 get '/ingredients_list'=>"ingredients#ingredients_list"
+post '/add_ingredients'=>"ingredients#add_ingredients"
+post '/add'=>"ingredients#add"
 
 
   # Example of regular route:

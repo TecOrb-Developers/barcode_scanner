@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-
+ 
   has_many :devices, dependent: :destroy
   has_many :social_authentications , dependent: :destroy
   has_many :members , dependent: :destroy
   has_many :preventives , dependent: :destroy
+  has_many :ingredients , dependent: :destroy
 	validates :name, :presence=>true
 
 	validates :email, :presence=>true,:uniqueness=>true
