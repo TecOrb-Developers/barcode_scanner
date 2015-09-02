@@ -40,15 +40,20 @@ class User < ActiveRecord::Base
       end          
       
       
-      def send_password_reset
+   def send_password_reset
         generate_password_token(:password_reset_token)
         self.password_reset_token_sent_at = Time.zone.now
         save!
         UserMailer.password_reset(self).deliver
-      end
+  end
 
-    def self.get_ingredients upc
+  def self.get_ingredients upc
      @consumer =  OAuth::AccessToken.new(OAuth::Consumer.new("0Y9NkNE1YQhEmraq0W84bfeXGbTjzwarhQsDxdKM", "ZIG4MzlCtXii8kZ8LlcxMRdCbmxJZV6nIvgOgD3B"))
      @consumer.get("http://api.v3.factual.com/t/products-cpg-nutrition?q=#{upc}")
     end
-end
+
+  def self.get_products name
+      @product = OAuth::AccessToken.new(OAuth::Consumer.new("0Y9NkNE1YQhEmraq0W84bfeXGbTjzwarhQsDxdKM", "ZIG4MzlCtXii8kZ8LlcxMRdCbmxJZV6nIvgOgD3B"))
+      @product.get("http://api.v3.factual.com/t/products-cpg?q=#{name}")
+   end
+ end 
