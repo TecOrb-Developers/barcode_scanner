@@ -5,21 +5,21 @@ class PreventivesController < ApplicationController
 		if params[:user_type].present?
 			@user =false
 			if params[:user_type] == "user"
-			  @user = User.find_by_id(params[:id]) 
-			  @msg = "#{params[:name]} preventive added to your profile"
+			    @user = User.find_by_id(params[:id]) 
+			    @msg = "#{params[:name]} preventive added to your profile"
 			elsif params[:user_type] == "member"
-			  @user = Member.find_by_id(params[:id])
-			  @msg = "#{params[:name]} preventive added to #{ @user ? @user.name : '' }"
+			    @user = Member.find_by_id(params[:id])
+			    @msg = "#{params[:name]} preventive added to #{ @user ? @user.name : '' }"
 			end			  	
 			if @user and params[:name].present?
 				if Ingredient.where('lower(ingredient_name) = ?', params[:name].downcase.strip).count == 0
-					Ingredient.create(:ingredient_name => params[:name].strip)
+				   Ingredient.create(:ingredient_name => params[:name].strip)
 				end
 				if @user.preventives.where('lower(name) = ?', params[:name].downcase.strip).count != 0 
-				  @preventive=@user.preventives.where('lower(name) = ?', params[:name].downcase.strip).first 
-				  @msg = "#{params[:name]} already added in profile" 
+				    @preventive=@user.preventives.where('lower(name) = ?', params[:name].downcase.strip).first 
+				    @msg = "#{params[:name]} already added in profile" 
 				else
-				  @preventive = @user.preventives.create(:name => params[:name].strip) 
+				    @preventive = @user.preventives.create(:name => params[:name].strip) 
 				end					
 				if @preventive.id != nil
 					render :json => {
@@ -60,7 +60,7 @@ class PreventivesController < ApplicationController
 			  @user = Member.find_by_id(params[:user_id])
 			  @msg = "Member does not exists"
 			else
-				@msg = "Please provide user type"
+			  @msg = "Please provide user type"
 			end
 			if @user.present?
 				if (@preventive.user_id == params[:user_id] and params[:user_type]=="user") or (@preventive.member_id == params[:user_id] and params[:user_type] == "member")
@@ -86,30 +86,6 @@ class PreventivesController < ApplicationController
 		                        :response_code => 500,
 		                        :response_message => "preventive does not exists."                         
 		                    }
-		end
-	end
-
-	def search_product_by_name
-		@user = User.find_by_id(params[:user_id])
-	  	if @user.present?  		
-		  	@response = search_product(params[:name])
-			if @response 
-		        render :json => {
-	        	                :response_code => 200,
-	        	                :response_message => "Result is successfully fetched" ,	        	               
-	        	                :products => @response
-			        	      }
-			 else
-			 	  render :json => {
-			        	                :response_code => 500,
-			        	                :response_message => "Product is not available. we will include this as soon as possible." 
-									}
-			 end
-		else
-		   render :json => {
-		        	                :response_code => 500,
-		        	                :response_message => "User does not exist" 
-								}
 		end
 	end
 end

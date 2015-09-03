@@ -22,12 +22,15 @@ require 'uri'
 			@consumer = api_authentication
 			url = "http://api.v3.factual.com/t/products-cpg?q=#{name}"
 	     	@response = @consumer.get(URI.encode(url))
+	        p"++++++++++++++++++#{(URI.encode(url))).inspect}*********************"
+
 			@data = []
 			@result = JSON.parse(@response.body)["response"]["data"]
 			if @result.present?  				
 				@result.each do |r|
 					product = {}
 					product["upc"] = r["upc"]
+					product["brand"]= r["brand"]
 					product["product_name"] = r["product_name"]
 					r["image_urls"].blank? ? product["image"] ='' : product["image"] = r["image_urls"].first
 					@data << product

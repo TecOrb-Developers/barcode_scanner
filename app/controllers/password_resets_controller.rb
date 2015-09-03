@@ -28,7 +28,7 @@ class PasswordResetsController < ApplicationController
 
 
  def update_password
-    @user = User.find_by_id(params[:user_id])
+    @user = User.find_by_id_and_password_reset_token(params[:user_id],params[:access_code])
     if @user
       if @user.update_attributes(:password=>params[:password],:password_confirmation=>params[:password_confirmation])
     	   render :json => { :Response_code => 200,
