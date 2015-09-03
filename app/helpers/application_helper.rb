@@ -20,13 +20,15 @@ require 'uri'
 
 	def search_product(name)
 			@consumer = api_authentication
-			url = "http://api.v3.factual.com/t/products-cpg?q=#{name}"
+			n = name.sub("&","")
+			url = "http://api.v3.factual.com/t/products-cpg?q=#{n}"
 	     	@response = @consumer.get(URI.encode(url))
 	        p"++++++++++++++++++#{(URI.encode(url))).inspect}*********************"
 
 			@data = []
-			@result = JSON.parse(@response.body)["response"]["data"]
-			if @result.present?  				
+			if  JSON.parse(@response.body)["response"].present?
+			  @result = JSON.parse(@response.body)["response"]["data"]
+			elsif @result.present?  				
 				@result.each do |r|
 					product = {}
 					product["upc"] = r["upc"]
