@@ -56,31 +56,6 @@ class IngredientsController < ApplicationController
 	end
   end
 
-  def search_product_by_name
-		@user = User.find_by_id(params[:user_id])
-	  	if @user.present?  		
-		  	@response = search_product(params[:name])
-		  	p"++++++++++++++++++#{@response.inspect}*********************"
-			if @response 
-		        render :json => {
-	        	                :response_code => 200,
-	        	                :response_message => "Result is successfully fetched" ,	        	               
-	        	                :products => @response
-			        	      }
-			 else
-			 	  render :json => {
-			        	                :response_code => 500,
-			        	                :response_message => "Product is not available. we will include this as soon as possible." 
-									}
-			 end
-		else
-		   render :json => {
-		        	                :response_code => 500,
-		        	                :response_message => "User does not exist" 
-								}
-		end
-	end
-
 
   def select_searched_product
   	@user = User.find_by_id(params[:user_id])
@@ -111,6 +86,30 @@ class IngredientsController < ApplicationController
 	end
   end
   
+   def search_product_by_name
+		@user = User.find_by_id(params[:user_id])
+	  	if @user.present?  		
+		  	@response = search_product(params[:name])
+			if @response 
+		        render :json => {
+	        	                :response_code => 200,
+	        	                :response_message => "Result is successfully fetched" ,	        	               
+	        	                :products => @response
+			        	      }
+			 else
+			 	  render :json => {
+			        	                :response_code => 500,
+			        	                :response_message => "Product is not available. we will include this as soon as possible." 
+									}
+			 end
+		else
+		   render :json => {
+		        	                :response_code => 500,
+		        	                :response_message => "User does not exist" 
+								}
+		end
+	end
+
  
   def search_ingredients
    @ingredients = Ingredient.where("(ingredient_name ILIKE (?)) or (ingredient_name ILIKE (?))", "#{params[:ingredient]}%","%#{params[:ingredient]}%")
