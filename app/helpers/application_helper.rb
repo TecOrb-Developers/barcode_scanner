@@ -24,8 +24,9 @@ require 'uri'
 			url = "http://api.v3.factual.com/t/products-cpg?q=#{n}"
 	     	@response = @consumer.get(URI.encode(url))
 			@data = []
+			if  JSON.parse(@response.body)["response"].present?
 			  @result = JSON.parse(@response.body)["response"]["data"]
-			if @result.present?  				
+			elsif @result.present?  				
 				@result.each do |r|
 					product = {}
 					product["upc"] = r["upc"]
