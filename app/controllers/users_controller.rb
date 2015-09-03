@@ -95,8 +95,23 @@ class UsersController < ApplicationController
   end
 
   def recent_searched_product
-    
-  end
+     @user = User.find_by_id(params[:user_id])
+     @histroy = ScanHistory.order(created_at: :desc)
+   if @user
+      @scan_histories =@user.scan_histories.first(5)
+      render :json => {
+                            :response_code => 200,
+                            :response_message => "Recently searched product fetched successfully" ,
+                            :scan_histroy => @scan_histories.as_json(:only=>[:product_name])                          
+                          }
+  else
+      render :json => {
+                            :response_code => 500,
+                            :response_message =>"No recent search product."                        
+                      }    
+
+    end
+ end
 
 	private
 	def users_params

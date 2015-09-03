@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root "ingredients#new"
+root "ingredients#new"
 resources :users
 post '/sign_up'=>"users#sign_up"
 get '/user_confirmation'=>"users#user_confirmation"
@@ -14,6 +14,7 @@ post '/update_password'=>"password_resets#update_password"
 post '/log_out'=>"sessions#log_out"
 post '/social_auth'=>"session#social_auth"
 resources :password_resets
+
 post '/my_profile' => "users#my_profile"
 post '/edit_profile' => "users#edit_profile"
 post '/add_member' => "members#add_member"
@@ -27,7 +28,6 @@ post '/contact_us' => "infos#contact_us"
 get  '/about_us' => "infos#about_us"
 get  '/terms_conditions' => "infos#terms_conditions"
 post '/ingredients_list'=>"ingredients#ingredients_list"
-post '/add_ingredients'=>"ingredients#add_ingredients"
 post '/search_ingredients' => "ingredients#search_ingredients"
 post '/add'=>"ingredients#add"
 post 'upload_file' => "ingredients#upload_file"
@@ -36,6 +36,7 @@ post '/search_product_by_name' => "ingredients#search_product_by_name"
 post '/select_searched_product' => "ingredients#select_searched_product"
 post '/scan_history'=>"users#scan_history"
 post '/recent_searched_product' => "users#recent_searched_product"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
