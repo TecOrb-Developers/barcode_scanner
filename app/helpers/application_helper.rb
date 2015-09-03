@@ -23,12 +23,10 @@ require 'uri'
 			n = name.sub("&","")
 			url = "http://api.v3.factual.com/t/products-cpg?q=#{n}"
 	     	@response = @consumer.get(URI.encode(url))
-	        p"++++++++++++++++++#{(URI.encode(url))).inspect}*********************"
-
-			@data = []
+	        @data = []
 			if  JSON.parse(@response.body)["response"].present?
-			  @result = JSON.parse(@response.body)["response"]["data"]
-			elsif @result.present?  				
+			   @result = JSON.parse(@response.body)["response"]["data"]
+			if @result.present?  				
 				@result.each do |r|
 					product = {}
 					product["upc"] = r["upc"]
@@ -37,7 +35,10 @@ require 'uri'
 					r["image_urls"].blank? ? product["image"] ='' : product["image"] = r["image_urls"].first
 					@data << product
 				end
-	            @data   	                
+	            @data  
+	            else
+	            false
+	            end 	                
 			 else
 			 	false
 			 end
