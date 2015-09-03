@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if @user
        render :json => {
                             :response_code => 200,
-                            :response_message => "Profile fatched"  ,
+                            :response_message => "Profile fetched"  ,
                             :user => @user.as_json(:only=>[:id,:name,:image,:DOB])                     
                           }
     else
@@ -60,12 +60,12 @@ class UsersController < ApplicationController
                             :response_message => "Profile updated"  ,
                             :user => @user.as_json(:only=>[:id,:name,:image,:DOB])                     
                           }
-           else
-            render :json => {
-                            :response_code => 500,
-                            :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"."                          
-                          }
-           end
+      else
+        render :json => {
+                      :response_code => 500,
+                      :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"."                          
+                    }
+      end
 
     else
       render :json => {
@@ -73,6 +73,28 @@ class UsersController < ApplicationController
                             :response_message => "user does not exists."                         
                           }
     end
+    
+  end
+
+  def scan_history
+    @user = User.find_by_id(params[:user_id])
+    if @user
+      @histroy =@user.scan_histories.where("created_at > ?",Date.today-1.month)
+      render :json => {
+                            :response_code => 200,
+                            :response_message => "history list fetched successfully" ,
+                            :scan_histroy => @histroy.as_json(:only=>[:product_name,:result,:unsafe_users,:created_at])                          
+                          }
+    else
+      render :json => {
+                            :response_code => 500,
+                            :response_message =>"User does not exists."                        
+                      }    
+
+    end
+  end
+
+  def recent_searched_product
     
   end
 

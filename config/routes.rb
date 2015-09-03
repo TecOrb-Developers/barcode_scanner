@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  root "ingredients#new"
 resources :users
 post '/sign_up'=>"users#sign_up"
 get '/user_confirmation'=>"users#user_confirmation"
@@ -25,11 +26,16 @@ post '/remove_preventive' => "preventives#remove_preventive"
 post '/contact_us' => "infos#contact_us"
 get  '/about_us' => "infos#about_us"
 get  '/terms_conditions' => "infos#terms_conditions"
-get '/ingredients_list'=>"ingredients#ingredients_list"
+post '/ingredients_list'=>"ingredients#ingredients_list"
 post '/add_ingredients'=>"ingredients#add_ingredients"
+post '/search_ingredients' => "ingredients#search_ingredients"
 post '/add'=>"ingredients#add"
-
-
+post 'upload_file' => "ingredients#upload_file"
+post '/scan_upc'=> "ingredients#scan_upc"
+post '/search_product_by_name' => "preventives#search_product_by_name"
+post '/select_searched_product' => "ingredients#select_searched_product"
+post '/scan_history'=>"users#scan_history"
+post '/recent_searched_product' => "users#recent_searched_product"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

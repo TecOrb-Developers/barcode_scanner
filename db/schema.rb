@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150827131414) do
-
+ActiveRecord::Schema.define(version: 20150902093833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,16 +41,9 @@ ActiveRecord::Schema.define(version: 20150827131414) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "ingredient_name"
-    t.string   "product_name"
-    t.string   "image_urls"
-    t.integer  "user_id"
-    t.integer  "member_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
-
-  add_index "ingredients", ["member_id"], name: "index_ingredients_on_member_id", using: :btree
-  add_index "ingredients", ["user_id"], name: "index_ingredients_on_user_id", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
@@ -75,6 +66,19 @@ ActiveRecord::Schema.define(version: 20150827131414) do
 
   add_index "preventives", ["member_id"], name: "index_preventives_on_member_id", using: :btree
   add_index "preventives", ["user_id"], name: "index_preventives_on_user_id", using: :btree
+
+  create_table "scan_histories", force: :cascade do |t|
+    t.string   "product_name"
+    t.string   "result"
+    t.string   "unsafe_users", default: [],              array: true
+    t.integer  "user_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "image"
+    t.string   "history_type"
+  end
+
+  add_index "scan_histories", ["user_id"], name: "index_scan_histories_on_user_id", using: :btree
 
   create_table "social_authentications", force: :cascade do |t|
     t.string   "provider_name"
@@ -105,10 +109,9 @@ ActiveRecord::Schema.define(version: 20150827131414) do
   end
 
   add_foreign_key "devices", "users"
-  add_foreign_key "ingredients", "members"
-  add_foreign_key "ingredients", "users"
   add_foreign_key "members", "users"
   add_foreign_key "preventives", "members"
   add_foreign_key "preventives", "users"
+  add_foreign_key "scan_histories", "users"
   add_foreign_key "social_authentications", "users"
 end
