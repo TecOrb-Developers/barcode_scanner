@@ -95,8 +95,8 @@ class UsersController < ApplicationController
   end
 
   def recent_searched_product
-     @user = User.find_by_id(params[:user_id])
-     @histroy = ScanHistory.order(created_at: :desc)
+      @user = User.find_by_id(params[:user_id])
+      @histroy = ScanHistory.order(created_at: :desc)
    if @user
       @scan_histories =@user.scan_histories.first(5)
       render :json => {

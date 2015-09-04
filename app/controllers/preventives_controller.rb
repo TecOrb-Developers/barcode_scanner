@@ -12,23 +12,23 @@ class PreventivesController < ApplicationController
 			    @msg = "#{params[:name]} preventive added to #{ @user ? @user.name : '' }"
 			end			  	
 			if @user and params[:name].present?
-				if Ingredient.where('lower(ingredient_name) = ?', params[:name].downcase.strip).count == 0
+			  if Ingredient.where('lower(ingredient_name) = ?', params[:name].downcase.strip).count == 0
 				   Ingredient.create(:ingredient_name => params[:name].strip)
-				end
-				if @user.preventives.where('lower(name) = ?', params[:name].downcase.strip).count != 0 
+			  end
+			    if @user.preventives.where('lower(name) = ?', params[:name].downcase.strip).count != 0 
 				    @preventive=@user.preventives.where('lower(name) = ?', params[:name].downcase.strip).first 
 				    @msg = "#{params[:name]} already added in profile" 
 				else
 				    @preventive = @user.preventives.create(:name => params[:name].strip) 
 				end					
-				if @preventive.id != nil
-					render :json => {
+				   if @preventive.id != nil
+					   render :json => {
 	                          :response_code => 200,
 	                          :response_message => @msg,
 	                          :user => @user.as_json(:only=>[:id,:name,:image,:DOB]),
 	                          :preventives =>  @user.preventives.as_json(:only =>[:id,:name])                  
 	                          }
-	            else
+	               else
 	            	render :json => {
                             :response_code => 500,
                             :response_message => @preventive.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"."                          
@@ -40,7 +40,7 @@ class PreventivesController < ApplicationController
 		                        :response_code => 500,
 		                        :response_message => @m                         
 		                      }
-			end
+		  end
 		else
 			render :json => {
 		                        :response_code => 500,
