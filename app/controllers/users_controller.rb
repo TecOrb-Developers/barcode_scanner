@@ -8,7 +8,7 @@ class UsersController < ApplicationController
         @user.password_confirmation = params[:password_confirmation] 
         if @user.save
          render :json => {
-                          :user => @user.as_json(:only=>[:name,:email,:DOB]),
+                          :user => @user.as_json(:only=>[:id,:name,:email,:DOB]),
         	                :response_code => 200,
         	                :response_message => "You've signed up successfully.You will receive a verification email "
         	               

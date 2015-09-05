@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902093833) do
+ActiveRecord::Schema.define(version: 20150905045109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150902093833) do
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "uid"
   end
 
   add_index "social_authentications", ["user_id"], name: "index_social_authentications_on_user_id", using: :btree
