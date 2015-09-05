@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 20150905045109) do
 
   create_table "social_authentications", force: :cascade do |t|
     t.string   "provider_name"
-    t.integer  "uid"
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
