@@ -1,5 +1,6 @@
 class Ingredient < ActiveRecord::Base
 	def self.upload_file(file)
+		p "-----------------#{self.inspect}"
 	  	CSV.foreach(file.path) do |row|
 	    	if row[0].present?
 	    		if !Ingredient.exists?(:ingredient_name => row[0].strip)
