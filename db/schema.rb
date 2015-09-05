@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20150902093833) do
   add_index "scan_histories", ["user_id"], name: "index_scan_histories_on_user_id", using: :btree
 
   create_table "social_authentications", force: :cascade do |t|
-    t.integer  "uid"
     t.string   "provider_name"
+    t.integer  "uid"
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
