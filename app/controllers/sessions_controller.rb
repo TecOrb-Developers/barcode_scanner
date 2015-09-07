@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       if user 
         if user.confirmation_token.nil? 
           if user.authenticate(params[:password])
-            render :json => { :response_code => 200,:response_message =>"You have successfully logged In"}
+            render :json => { :response_code => 200,:user=>user.as_json(:only =>[:id]),:response_message =>"You have successfully logged In"}
           else
             render :json => { :response_code => 500,:response_message =>"Email or password is invalid"}
           end
