@@ -77,18 +77,21 @@ class UsersController < ApplicationController
   end
 
   def scan_history
-    @user = User.find_by_id(params[:user_id])
-    if @user
-      @histroy =@user.scan_histories.where("created_at > ?",Date.today-1.month)
-      render :json => {
+    @user = User.find(params[:user_id])
+    if @user.present? and @user.scan_histories.present?
+       @history =@user.scan_histories.where("created_at > ?",Date.today-1.month)  
+       render :json => {
                             :response_code => 200,
                             :response_message => "history list fetched successfully" ,
-                            :scan_histroy => @histroy.as_json(:only=>[:user_id,:product_name,:result,:unsafe_users,:created_at])                          
+                            :scan_histroy => @history.as_json(:only=>[:user_id,:product_name,:result,:unsafe_users,:created_at])                          
                           }
-    else
+     
+                         
+                          
+     else
       render :json => {
                             :response_code => 500,
-                            :response_message =>"User does not exists."                        
+                            :response_message =>"Sorry! No history for this user"                        
                       }    
 
     end
@@ -97,7 +100,7 @@ class UsersController < ApplicationController
   def recent_searched_product
       @user = User.find_by_id(params[:user_id])
       @histroy = ScanHistory.order(created_at: :desc)
-   if @user
+   if @user.present? and @user.scan_histories.present?
       @scan_histories =@user.scan_histories.first(5)
       render :json => {
                             :response_code => 200,
@@ -107,7 +110,7 @@ class UsersController < ApplicationController
   else
       render :json => {
                             :response_code => 500,
-                            :response_message =>"No recent search product."                        
+                            :response_message =>"Sorry! User id does not exists"                        
                       }    
 
     end
