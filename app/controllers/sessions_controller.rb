@@ -20,14 +20,5 @@ class SessionsController < ApplicationController
   def log_out
       render :json =>  { :response_code => 200,:response_message =>"Successfully logged out."}
   end
-
-  def social_auth
-     @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:uid])
-      if @user.present?
-       render :json => { :response_code => 200,:response_message =>"You have successfully logged In !"}
-     else
-       render :json => { :response_code => 500,:response_message =>"Authentication failed"}
-    end
-  end
-
 end
+      
