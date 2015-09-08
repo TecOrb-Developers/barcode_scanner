@@ -83,7 +83,7 @@ class UsersController < ApplicationController
       render :json => {
                             :response_code => 200,
                             :response_message => "history list fetched successfully" ,
-                            :scan_histroy => @histroy.as_json(:only=>[:product_name,:result,:unsafe_users,:created_at])                          
+                            :scan_histroy => @histroy.as_json(:only=>[:user_id,:product_name,:result,:unsafe_users,:created_at])                          
                           }
     else
       render :json => {
