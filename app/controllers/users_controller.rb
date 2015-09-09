@@ -128,7 +128,7 @@ class UsersController < ApplicationController
       render :json => {
                             :response_code => 200,
                             :response_message => "Recently searched product fetched successfully" ,
-                            :scan_histroy => @scan_histories.as_json(:only=>[:product_name])                          
+                            :scan_histroy => @scan_histories.as_json(:only=>[:product_name,:image])                          
                           }
   else
       render :json => {
