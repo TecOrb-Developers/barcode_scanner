@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 root "ingredients#new"
 resources :users
+post '/reg' => "users#reg"
 post '/sign_up'=>"users#sign_up"
 get '/user_confirmation'=>"users#user_confirmation"
 post '/log_in'=>"sessions#log_in"

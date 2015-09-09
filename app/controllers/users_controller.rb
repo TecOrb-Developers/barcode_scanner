@@ -3,22 +3,45 @@ class UsersController < ApplicationController
   end 
 
  def sign_up
-       @user = User.new(users_params)
-        @user.password = params[:password]
-        @user.password_confirmation = params[:password_confirmation] 
-        if @user.save
-         render :json => {
-                          :user => @user.as_json(:only=>[:id,:name,:email]),
-        	                :response_code => 200,
-        	                :response_message => "You've signed up successfully.You will receive a verification email "
-        	               
-        	              }
-       else
+    if params[:signup_type]=="normal"
+      @user = User.new(users_params)
+      @user.password = params[:password]
+      @user.password_confirmation = params[:password_confirmation] 
+      if @user.save
+       render :json => {
+                        :user => @user.as_json(:only=>[:id,:name,:email]),
+                        :response_code => 200,
+                        :response_message => "You've signed up successfully.You will receive a verification email "
+                       }
+      else
         render :json => {
-        	                :response_code => 500,
-        	                :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
+                        :response_code => 500,
+                        :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
+                       }
+      end                 
+    else
+      if params[:email].present?
+        if User.where(:email => params[:email].strip).present?
+          @user = User.find_by_email(params[:email].strip)
+           render :json => {                         
+                          :response_code => 200,
+                          :response_message => "Welcome, You've signed in successfully.",
+                          :user => @user.as_json(:only=>[:id,:name,:email])
                         }
-    end 	                  
+        else
+          render :json => {
+                         # :user => @user.as_json(:only=>[:id,:email,:provider_name]),
+                          :response_code => 203,
+                          :response_message => "Email does not exist in our database."
+                        }
+        end
+      else
+        render :json => {
+                          :response_code => 500,
+                          :response_message => "Email not found."
+                        }
+      end
+    end  
   end	
 
  def user_confirmation
@@ -116,34 +139,35 @@ class UsersController < ApplicationController
     end
  end
 
- def social_auth
-     @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:uid])
-      if @user.present?
-       render :json => { :response_code => 200,:user_id=>@user.id,:response_message =>"You have successfully logged In !"}
-     else
-       render :json => { :response_code => 501,:response_message =>"Authentication failed"}
-    end
-  end
+ # def social_auth
+ #     @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:uid])
+ #      if @user.present?
+ #       render :json => { :response_code => 200,:user_id=>@user.id,:response_message =>"You have successfully logged In !"}
+ #     else
+ #       render :json => { :response_code => 501,:response_message =>"Authentication failed"}
+ #    end
+ #  end
 
 
- def authenticate_user
-       @user = User.new(users_params)
-        @user.password = SecureRandom.urlsafe_base64
-        if @user.save
-          @user.social_authentications.create(provider_name: params[:provider_name],uid: params[:uid])
-         render :json => {
-                          :user => @user.as_json(:only=>[:id,:name,:email]),
-                          :response_code => 200,
-                          :response_message => "You've signed up successfully.You will receive a verification email "
+
+ # def authenticate_user
+ #       @user = User.new(users_params)
+ #        @user.password = SecureRandom.urlsafe_base64
+ #        if @user.save
+ #          @user.social_authentications.create(provider_name: params[:provider_name],uid: params[:uid])
+ #         render :json => {
+ #                          :user => @user.as_json(:only=>[:id,:name,:email]),
+ #                          :response_code => 200,
+ #                          :response_message => "You've signed up successfully.You will receive a verification email "
                          
-                        }
-       else
-        render :json => {
-                          :response_code => 500,
-                          :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
-                        }
-    end
-  end 
+ #                        }
+ #       else
+ #        render :json => {
+ #                          :response_code => 500,
+ #                          :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
+ #                        }
+ #    end
+ #  end 
  
 
 	private

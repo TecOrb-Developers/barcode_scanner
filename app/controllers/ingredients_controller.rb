@@ -7,10 +7,11 @@ class IngredientsController < ApplicationController
 
         render :json => {
 	        	                :response_code => 200,
-	        	                :response_message => "ingredients list"  ,
+	        	                :ingredient_list => {
 	        	                :product_name=>@response["product_name"],
 	        	                :image=> @response["image"].first,
 	        	                :ingredients=>@response["ingredients"]
+	        	            }
 	        	      }
 	 else
 	 	  render :json => {
