@@ -119,7 +119,7 @@ class UsersController < ApplicationController
  def social_auth
      @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:uid])
       if @user.present?
-       render :json => { :response_code => 200,:user=>@user.as_json(:only=>[:user_id]),:response_message =>"You have successfully logged In !"}
+       render :json => { :response_code => 200,:user_id=>@user.id,:response_message =>"You have successfully logged In !"}
      else
        render :json => { :response_code => 501,:response_message =>"Authentication failed"}
     end
