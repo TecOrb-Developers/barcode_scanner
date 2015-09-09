@@ -1,4 +1,4 @@
-class AdddobToUsers < ActiveRecord::Migration
+class AddDobToUsers < ActiveRecord::Migration
   def change
     add_column :users, :dob, :timestamp
   end
