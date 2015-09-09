@@ -33,7 +33,7 @@ class PasswordResetsController < ApplicationController
       if @user.update_attributes(:password=>params[:password],:password_confirmation=>params[:password_confirmation])
     	   render :json => { :response_code => 200,
     	  	              :response_message => "Password has been changed",
-                        :user=> @user.as_json(:only=>[:name,:email,:DOB]),
+                        :user=> @user.as_json(:only=>[:name,:email,:dob]),
     	  	              }	
       else
          render :json => { :response_code => 200,

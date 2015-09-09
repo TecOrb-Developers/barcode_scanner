@@ -25,7 +25,7 @@ class PreventivesController < ApplicationController
 					   render :json => {
 	                          :response_code => 200,
 	                          :response_message => @msg,
-	                          :user => @user.as_json(:only=>[:id,:name,:image,:DOB]),
+	                          :user => @user.as_json(:only=>[:id,:name,:image,:dob]),
 	                          :preventives =>  @user.preventives.as_json(:only =>[:id,:name])                  
 	                          }
 	               else

@@ -37,7 +37,7 @@ class UsersController < ApplicationController
        render :json => {
                             :response_code => 200,
                             :response_message => "Profile fetched"  ,
-                            :user => @user.as_json(:only=>[:id,:name,:image,:DOB])                     
+                            :user => @user.as_json(:only=>[:id,:name,:image,:dob])                     
                           }
     else
       render :json => {
@@ -53,12 +53,12 @@ class UsersController < ApplicationController
        @user.name = params[:name]
        @user.image = params[:image] if params[:image].present?
 
-       @user.DOB = params[:DOB] if params[:DOB].present?
+       @user.dob = params[:dob] if params[:dob].present?
        if @user.save
          render :json => {
                             :response_code => 200,
                             :response_message => "Profile updated"  ,
-                            :user => @user.as_json(:only=>[:id,:name,:image,:DOB])                     
+                            :user => @user.as_json(:only=>[:id,:name,:image,:dob])                     
                           }
       else
         render :json => {
@@ -148,7 +148,7 @@ class UsersController < ApplicationController
 
 	private
 	def users_params
-		params.require(:user).permit(:name,:email,:password,:password_confirmation,:user_type,:DOB)
+		params.require(:user).permit(:name,:email,:password,:password_confirmation,:user_type,:dob)
 	end
 
 end
