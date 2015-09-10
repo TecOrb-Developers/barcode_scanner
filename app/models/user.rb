@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_many :members , dependent: :destroy
   has_many :preventives , dependent: :destroy
   has_many :scan_histories, dependent: :destroy
-	#validates :name, :presence=>true
   mount_uploader :image, AvatarUploader
 
 	validates :email, :presence=>true,:uniqueness=>true
