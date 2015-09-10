@@ -95,8 +95,8 @@ def user_confirmation
        if @user.save
          render :json => {
                             :response_code => 200,
-                            :response_message => "Profile updated"  ,
-                            :user => @user.as_json(:only=>[:id,:name,:image,:dob])                     
+                            :response_message => "Profile updated"
+                                              
                           }
       else
         render :json => {
@@ -153,28 +153,6 @@ def user_confirmation
 
     end
  end
-
-
-
- # def authenticate_user
- #       @user = User.new(users_params)
- #        @user.password = SecureRandom.urlsafe_base64
- #        if @user.save
- #          @user.social_authentications.create(provider_name: params[:provider_name],uid: params[:uid])
- #         render :json => {
- #                          :user => @user.as_json(:only=>[:id,:name,:email]),
- #                          :response_code => 200,
- #                          :response_message => "You've signed up successfully.You will receive a verification email "
-                         
- #                        }
- #       else
- #        render :json => {
- #                          :response_code => 500,
- #                          :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
- #                        }
- #    end
- #  end 
- 
 
 	private
 	def users_params
