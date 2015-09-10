@@ -120,7 +120,7 @@ class IngredientsController < ApplicationController
 	        	       }
   end
 
- def upload_file
+ def upload_file                
  	Ingredient.upload_file(params[:file][:file])
  	redirect_to :back
  end

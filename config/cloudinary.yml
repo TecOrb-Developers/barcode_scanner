@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: mobiloitte1
+  api_key: '873678826972591'
+  api_secret: HUWBXUvm4PcW9VUjxXWp8y3eWNA
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: mobiloitte1
+  api_key: '873678826972591'
+  api_secret: HUWBXUvm4PcW9VUjxXWp8y3eWNA
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: mobiloitte1
+  api_key: '873678826972591'
+  api_secret: HUWBXUvm4PcW9VUjxXWp8y3eWNA
+  enhance_image_tag: true
+  static_image_support: false
