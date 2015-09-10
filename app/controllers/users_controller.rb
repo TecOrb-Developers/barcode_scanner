@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   end 
 
  def sign_up
-    if params[:signup_type]=="normal"
+    if params[:signup_type]=="inapp"
       @user = User.new(users_params)
       @user.password = params[:password]
       @user.password_confirmation = params[:password_confirmation] 
@@ -19,32 +19,47 @@ class UsersController < ApplicationController
                         :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
                        }
       end                 
-    else
-      if params[:email].present?
-        if User.where(:email => params[:email].strip).present?
-          @user = User.find_by_email(params[:email].strip)
-           render :json => {                         
+    
+     elsif params[:signup_type]=="facebook" or params[:signup_type]=="google"
+           @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:provider_id],params[:email])
+           if @user
+            #logger.info"=========#{@user.inspect}=============111111"
+             render :json => {                         
                           :response_code => 200,
                           :response_message => "Welcome, You've signed in successfully.",
                           :user => @user.as_json(:only=>[:id,:name,:email])
                         }
-        else
-          render :json => {
-                         # :user => @user.as_json(:only=>[:id,:email,:provider_name]),
-                          :response_code => 203,
-                          :response_message => "Email does not exist in our database."
-                        }
-        end
-      else
-        render :json => {
-                          :response_code => 500,
-                          :response_message => "Email not found."
-                        }
-      end
+          else
+            if params[:signup_try] == "last"
+              #logger.info"=========#{@user.inspect}=============22222222222"
+             @user = User.new(users_params)
+             @user.password = params[:password]
+             @user.password_confirmation = params[:password_confirmation] 
+              if @user.save
+                 @social_auth = @user.social_authentications.create(:uid=> params[:provider_id],:provider_name=>params[:provider_name],:email => params[:email]) 
+                 render :json => {
+                                  :user => @user.as_json(:only=>[:id,:name,:email]),
+                                  :response_code => 200,
+                                  :response_message => "You've signed up successfully.You will receive a verification email "
+                                 }
+              else
+                render :json => {
+                                :response_code => 500,
+                                :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
+                               }
+              end
+            else
+              render :json => {                         
+                     :response_code => 203,
+                     :response_message => "Please try manual sign_up.",
+              }
+            end  
+          end
+        
     end  
   end	
 
- def user_confirmation
+def user_confirmation
       @user = User.find_by_confirmation_token(params[:confirmation_token])
       if @user.present?
                User.confirm(@user)
@@ -138,15 +153,6 @@ class UsersController < ApplicationController
 
     end
  end
-
- # def social_auth
- #     @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:uid])
- #      if @user.present?
- #       render :json => { :response_code => 200,:user_id=>@user.id,:response_message =>"You have successfully logged In !"}
- #     else
- #       render :json => { :response_code => 501,:response_message =>"Authentication failed"}
- #    end
- #  end
 
 
 

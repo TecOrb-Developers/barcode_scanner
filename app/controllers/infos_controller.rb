@@ -6,7 +6,7 @@ class InfosController < ApplicationController
 			render :json => {
                     :response_code => 200,
                     :response_message => "Query submitted successfully"  ,
-                    :user => @contact.as_json(:only=>[:id,:name,:subject,:description])                     
+                    :user => @contact.as_json(:only=>[:name,:subject,:description])                     
                   }
 		else
 			render :json => {

@@ -66,9 +66,8 @@ class MembersController < ApplicationController
 			 if @member.save
 				 render :json => {
 	        	                :response_code => 200,
-	        	                :response_message => "Profile updated"  ,
-	        	                :member => @member.as_json(:only=>[:id,:name,:image,:dob])     	               
-	        	              }
+	        	                :response_message => "Profile updated"
+	        	                 }
 	       	 else
 	       	 	render :json => {
 	        	                :response_code => 500,
