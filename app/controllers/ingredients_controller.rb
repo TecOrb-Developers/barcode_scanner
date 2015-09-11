@@ -10,7 +10,7 @@ class IngredientsController < ApplicationController
 	        	                :response_message => "ingredients list"  ,
 	        	                :product_name=>@response["product_name"],
 	        	                :image=> @response["image"].first,
-	        	                :ingredients=>@response["ingredients"]
+	        	                :ingredients=>@response["ingredients"].present? ? @response["ingredients"] : []
 	        	      }
 	 else
 	 	  render :json => {
