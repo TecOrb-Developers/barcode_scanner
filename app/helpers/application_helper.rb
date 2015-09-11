@@ -57,12 +57,12 @@ require 'uri'
 				@member["name"] = m.name
 				@matching = ingredients_match_algo(m,@response["ingredients"])
 				if @matching == "safe"
-				  @member["state"] = "You can eat. Product is safe" 
+				  @member["state"] = "You can eat." 
 				elsif @matching == "not ingredients"
 				   	@member["state"] = "Ingredients of the product are not available, thats why we are not sure about product"
 				    @scan_state = "not sure"
 				else 
-				   @member["state"] = "Product is not safe."	 
+				   @member["state"] = "You can not eat."	 
 				   @member["harmful_ingredients"]=@matching	
 				   @unsafe_users << m.name
 				   @scan_state = "not"

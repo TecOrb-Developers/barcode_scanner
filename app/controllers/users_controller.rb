@@ -73,8 +73,8 @@ def user_confirmation
     if @user
        render :json => {
                             :response_code => 200,
-                            :response_message => "Profile fetched"  ,
-                            :user => @user.as_json(:only=>[:id,:name,:image,:dob])  ,
+                            :response_message => "Profile fetched",
+                            :user => @user.as_json(:only=>[:id,:name,:image,:dob]),
                             :preventive_list => @user.preventives.as_json(only: [:name])                   
                           }
     else
