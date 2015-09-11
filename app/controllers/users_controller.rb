@@ -74,7 +74,8 @@ def user_confirmation
        render :json => {
                             :response_code => 200,
                             :response_message => "Profile fetched",
-                            :user => @user.as_json(:only=>[:id,:name,:image,:dob])
+                            :user => @user.as_json(:only=>[:id,:name,:image,:dob]),
+                            :preventive_list => @user.preventives.as_json(only: [:name])
                                                
                           }
     else
@@ -85,21 +86,21 @@ def user_confirmation
     end
   end
 
-  def user_preventives
-    @user =User.find_by_id(params[:user_id])
-    if @user
-      render :json => {
-                            :response_code => 200,
-                            :response_message => "Preventive list",
-                            :preventive_list => @user.preventives.as_json(only: [:name])                   
-                          }
-    else                    
-      render :json => {
-                            :response_code => 500,
-                            :response_message => "user does not exists."                         
-                          }
-    end
-  end 
+  # def user_preventives
+  #   @user =User.find_by_id(params[:user_id])
+  #   if @user
+  #     render :json => {
+  #                           :response_code => 200,
+  #                           :response_message => "Preventive list",
+  #                           :preventive_list => @user.preventives.as_json(only: [:name])                   
+  #                         }
+  #   else                    
+  #     render :json => {
+  #                           :response_code => 500,
+  #                           :response_message => "user does not exists."                         
+  #                         }
+  #   end
+  # end 
 
   def edit_profile
     @user = User.find_by_id(params[:user_id])

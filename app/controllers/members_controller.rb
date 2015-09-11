@@ -47,7 +47,8 @@ class MembersController < ApplicationController
 			 render :json => {
 	        	                :response_code => 200,
 	        	                :response_message => "Member Lists"  ,
-	        	                :member => @member.as_json(:only=>[:id,:name,:image,:dob])  
+	        	                :member => @member.as_json(:only=>[:id,:name,:image,:dob]),
+	        	                :preventives => @member.preventives.as_json(only:[:name])  
 	        	                   	               
 	        	              }
 		else
@@ -102,19 +103,19 @@ class MembersController < ApplicationController
 		end
 	end
 
-	def member_preventives
-		@member = Member.find_by_id(params[:member_id])
-		if @member
-			render :json => {
-	        	                :response_code => 200,
-	        	                :response_message => "preventives List"  ,
-	        	                :preventives => @member.preventives.as_json(only:[:name])   	               
-	        	              }
-        else
-        	render :json => {
-	        	                :response_code => 500,
-	        	                :response_message => "Member does not exists."        	               
-	        	              }
-		end
-     end	
+	# def member_preventives
+	# 	@member = Member.find_by_id(params[:member_id])
+	# 	if @member
+	# 		render :json => {
+	#         	                :response_code => 200,
+	#         	                :response_message => "preventives List"  ,
+	#         	                :preventives => @member.preventives.as_json(only:[:name])   	               
+	#         	              }
+ #        else
+ #        	render :json => {
+	#         	                :response_code => 500,
+	#         	                :response_message => "Member does not exists."        	               
+	#         	              }
+	# 	end
+ #     end	
   end

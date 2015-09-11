@@ -12,8 +12,8 @@ post '/forgot_password'=>"password_resets#forgot_password"
 post '/access_code'=>"password_resets#access_code"
 post '/update_password'=>"password_resets#update_password"
 post '/log_out'=>"sessions#log_out"
-post '/social_auth'=>"users#social_auth"
-post '/authenticate_user'=>"users#authenticate_user"
+# post '/social_auth'=>"users#social_auth"
+# post '/authenticate_user'=>"users#authenticate_user"
 resources :password_resets
 
 post '/my_profile' => "users#my_profile"
@@ -37,8 +37,8 @@ post '/search_product_by_name' => "ingredients#search_product_by_name"
 post '/select_searched_product' => "ingredients#select_searched_product"
 post '/scan_history'=>"users#scan_history"
 post '/recent_searched_product' => "users#recent_searched_product"
-post '/member_preventives'=>"members#member_preventives"
-post '/user_preventives'=>"users#user_preventives"
+# post '/member_preventives'=>"members#member_preventives"
+# post '/user_preventives'=>"users#user_preventives"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
