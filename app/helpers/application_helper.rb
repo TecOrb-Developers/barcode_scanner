@@ -73,12 +73,12 @@ require 'uri'
 			@user_result["name"] = user.name
 			@match = ingredients_match_algo(user,@response["ingredients"])
 			if @match == "safe"
-				@user_result["state"]="You can eat. Product is safe" 
+				@user_result["state"]="You can eat." 
 			elsif @match == "not ingredients"
 				@user_result["state"] = "Ingredients of the product are not available, thats why we are not sure about product"
 				@scan_state = "not sure"
 			else
-			    @user_result["state"]="Product is not safe." 
+			    @user_result["state"]="You can not eat." 
 			    @user_result["harmful_ingredients"]=@match
 				@unsafe_users << user.name
 			    @scan_state = "not"
