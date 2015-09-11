@@ -1,11 +1,8 @@
 class RenameTypeDob < ActiveRecord::Migration
-  def up
-    change_column :members, :dob, :datetime
-    change_column :users, :dob, :datetime
-  end
-
-  def down
-    change_column :members, :dob, :timestamp
-    change_column :users, :dob, :timestamp    
+  def change
+  	remove_column :users, :dob ,:timestamp
+  	remove_column :members, :dob ,:timestamp
+  	add_column :users, :dob, :float
+    add_column :members, :dob, :float
   end
 end

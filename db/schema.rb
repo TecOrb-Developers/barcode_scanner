@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20150911062648) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "dob"
+    t.float    "dob"
   end
 
   add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20150911062648) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.string   "image"
-    t.datetime "dob"
+    t.float    "dob"
   end
 
   add_foreign_key "devices", "users"
