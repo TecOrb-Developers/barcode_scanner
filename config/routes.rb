@@ -37,6 +37,8 @@ post '/search_product_by_name' => "ingredients#search_product_by_name"
 post '/select_searched_product' => "ingredients#select_searched_product"
 post '/scan_history'=>"users#scan_history"
 post '/recent_searched_product' => "users#recent_searched_product"
+post '/member_preventives'=>"members#member_preventives"
+post '/user_preventives'=>"users#user_preventives"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
