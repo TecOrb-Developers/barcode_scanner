@@ -73,7 +73,7 @@ def user_confirmation
                             :response_code => 200,
                             :response_message => "Profile fetched",
                             :user => @user.as_json(:only=>[:id,:name,:dob]).merge!(image: @user.image.url),
-                            :preventive_list => @user.preventives.as_json(only: [:name])
+                            :preventive_list => @user.preventives.as_json(only: [:id,:name])
                                                
                           }
     else
