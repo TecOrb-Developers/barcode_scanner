@@ -12,8 +12,7 @@ post '/forgot_password'=>"password_resets#forgot_password"
 post '/access_code'=>"password_resets#access_code"
 post '/update_password'=>"password_resets#update_password"
 post '/log_out'=>"sessions#log_out"
-# post '/social_auth'=>"users#social_auth"
-# post '/authenticate_user'=>"users#authenticate_user"
+get '/subscription'=>"infos#subscription"
 resources :password_resets
 
 post '/my_profile' => "users#my_profile"
