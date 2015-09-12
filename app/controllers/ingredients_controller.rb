@@ -81,8 +81,8 @@ class IngredientsController < ApplicationController
 	    end	      
 	else
 	   render :json => {
-	        	                :response_code => 500,
-	        	                :response_message => "User does not exist" 
+	        	            :response_code => 500,
+	        	            :response_message => "User does not exist" 
 							}
 	end
   end

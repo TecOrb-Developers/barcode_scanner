@@ -39,7 +39,7 @@ require 'uri'
 	            else
 	            false
 	           end 	                
-			 else
+			   else
 			 	false
 			 end
 		end
@@ -62,7 +62,7 @@ require 'uri'
 				   	@member["state"] = "Ingredients of the product are not available, thats why we are not sure about product"
 				    @scan_state = "not sure"
 				else 
-				   @member["state"] = "You can not eat."	 
+				   @member["state"] = "Do not eat."	 
 				   @member["harmful_ingredients"]=@matching	
 				   @unsafe_users << m.name
 				   @scan_state = "not"
@@ -78,7 +78,7 @@ require 'uri'
 				@user_result["state"] = "Ingredients of the product are not available, thats why we are not sure about product"
 				@scan_state = "not sure"
 			else
-			    @user_result["state"]="You can not eat." 
+			    @user_result["state"]="Do not eat." 
 			    @user_result["harmful_ingredients"]=@match
 				@unsafe_users << user.name
 			    @scan_state = "not"
