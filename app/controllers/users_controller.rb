@@ -23,7 +23,6 @@ class UsersController < ApplicationController
      elsif params[:signup_type]=="facebook" or params[:signup_type]=="google"
            @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:provider_id],params[:email])
            if @user
-            #logger.info"=========#{@user.inspect}=============111111"
              render :json => {                         
                           :response_code => 200,
                           :response_message => "Welcome, You've signed in successfully.",
@@ -31,7 +30,6 @@ class UsersController < ApplicationController
                         }
           else
             if params[:signup_try] == "last"
-              #logger.info"=========#{@user.inspect}=============22222222222"
              @user = User.new(users_params)
              @user.password = params[:password]
              @user.password_confirmation = params[:password_confirmation] 
@@ -71,10 +69,10 @@ def user_confirmation
   def my_profile
     @user = User.find_by_id(params[:user_id])
     if @user
-       render :json => {
+      render :json => {
                             :response_code => 200,
                             :response_message => "Profile fetched",
-                            :user => @user.as_json(:only=>[:id,:name,:image,:dob]),
+                            :user => @user.as_json(:only=>[:id,:name,:dob]).merge!(image: @user.image.url),
                             :preventive_list => @user.preventives.as_json(only: [:name])
                                                
                           }
@@ -86,21 +84,6 @@ def user_confirmation
     end
   end
 
-  # def user_preventives
-  #   @user =User.find_by_id(params[:user_id])
-  #   if @user
-  #     render :json => {
-  #                           :response_code => 200,
-  #                           :response_message => "Preventive list",
-  #                           :preventive_list => @user.preventives.as_json(only: [:name])                   
-  #                         }
-  #   else                    
-  #     render :json => {
-  #                           :response_code => 500,
-  #                           :response_message => "user does not exists."                         
-  #                         }
-  #   end
-  # end 
 
   def edit_profile
     @user = User.find_by_id(params[:user_id])
