@@ -50,7 +50,7 @@ class IngredientsController < ApplicationController
 						}
 	    end	      
 	else
-	   render :json => {
+	        render :json => {
 	        	                :response_code => 500,
 	        	                :response_message => "User does not exist" 
 							}
@@ -80,7 +80,7 @@ class IngredientsController < ApplicationController
 						}
 	    end	      
 	else
-	   render :json => {
+	        render :json => {
 	        	            :response_code => 500,
 	        	            :response_message => "User does not exist" 
 							}
@@ -92,15 +92,15 @@ class IngredientsController < ApplicationController
 	  	if @user.present?  		
 		  	@response = search_product(params[:name])
 			if @response 
-		        render :json => {
+		       render :json => {
 	        	                :response_code => 200,
 	        	                :response_message => "Result is successfully fetched" ,	        	               
 	        	                :products => @response
 			        	      }
-			 else
-			 	  render :json => {
-			        	                :response_code => 500,
-			        	                :response_message => "Product is not available. we will include this as soon as possible." 
+			else
+			  render :json => {
+			       	                :response_code => 500,
+			        	            :response_message => "Product is not available. we will include this as soon as possible." 
 									}
 			 end
 		else
