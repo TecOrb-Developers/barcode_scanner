@@ -44,19 +44,19 @@ class UsersController < ApplicationController
                 render :json => {
                                 :response_code => 500,
                                 :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"." 
-                               }
+                                }
               end
             else
               render :json => {                         
-                     :response_code => 203,
-                     :response_message => "Please try manual sign_up.",
-              }
+                                :response_code => 203,
+                                :response_message => "Please try manual sign_up.",
+                              }
             end  
           end
       end  
   end	
 
-def user_confirmation
+ def user_confirmation
       @user = User.find_by_confirmation_token(params[:confirmation_token])
       if @user.present?
                User.confirm(@user)
@@ -69,7 +69,7 @@ def user_confirmation
   def my_profile
     @user = User.find_by_id(params[:user_id])
     if @user
-      render :json => {
+         render :json => {
                             :response_code => 200,
                             :response_message => "Profile fetched",
                             :user => @user.as_json(:only=>[:id,:name,:dob]).merge!(image: @user.image.url),
@@ -77,7 +77,7 @@ def user_confirmation
                                                
                           }
     else
-      render :json => {
+         render :json => {
                             :response_code => 500,
                             :response_message => "user does not exists."                         
                           }
@@ -94,31 +94,30 @@ def user_confirmation
        @user.dob = params[:dob] if params[:dob].present?
        if @user.save
          render :json => {
-                            :response_code => 200,
-                            :response_message => "Profile updated"
+                          :response_code => 200,
+                          :response_message => "Profile updated"
                                               
                           }
       else
         render :json => {
-                      :response_code => 500,
-                      :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"."                          
-                    }
+                         :response_code => 500,
+                         :response_message => @user.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"."                          
+                        }
       end
 
     else
-      render :json => {
-                            :response_code => 500,
-                            :response_message => "user does not exists."                         
-                          }
-    end
-    
+       render :json => {
+                         :response_code => 500,
+                         :response_message => "user does not exists."                         
+                       }
+     end
   end
 
   def scan_history
     @user = User.find(params[:user_id])
     if @user.present? and @user.scan_histories.present?
        @history =@user.scan_histories.where("created_at > ?",Date.today-1.month)  
-       render :json => {
+        render :json => {
                             :response_code => 200,
                             :response_message => "history list fetched successfully" ,
                             :scan_histroy => @history.as_json(:only=>[:user_id,:product_name,:result,:unsafe_users,:created_at])                          

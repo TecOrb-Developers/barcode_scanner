@@ -4,15 +4,15 @@ class InfosController < ApplicationController
 		@contact = Contact.create(name: params[:name],subject: params[:subject],description: params[:description])	
 		if @contact.id != nil
 			render :json => {
-                    :response_code => 200,
-                    :response_message => "Query submitted successfully"  ,
-                    :user => @contact.as_json(:only=>[:name,:subject,:description])                     
-                  }
+                    		:response_code => 200,
+                    		:response_message => "Query submitted successfully"  ,
+                    		:user => @contact.as_json(:only=>[:name,:subject,:description])                     
+                            }
 		else
 			render :json => {
                             :response_code => 500,
                             :response_message => @contact.errors.messages.map{ |k,v| "#{k.capitalize.to_s.gsub('_',' ')} #{v.first}"}.join(', ')+"."                          
-                          }
+                            }
 
 		end					
 	end
@@ -20,16 +20,16 @@ class InfosController < ApplicationController
 	def about_us
 	   @page = Info.find_by_page_name("About us")
 	   if @page
-		   	render :json => {
-	                    :response_code => 200,
-	                    :response_message => "About us page info"  ,
-	                    :description => @page.description
-	                  }
+		   render :json => {
+	                       :response_code => 200,
+	                       :response_message => "About us page info"  ,
+	                       :description => @page.description
+	                       }
 	   else
-	   		render :json => {
-                            :response_code => 500,
-                            :response_message => "Page not found"                          
-                          }
+	   	   render :json => {
+                           :response_code => 500,
+                           :response_message => "Page not found"                          
+                           }
 	   end
 	end
 
@@ -37,15 +37,15 @@ class InfosController < ApplicationController
 	   @page = Info.find_by_page_name("Policy")
 	   if @page
 		   	render :json => {
-	                    :response_code => 200,
-	                    :response_message => "Terms & Conditions"  ,
-	                    :description => @page.description
-	                  }
+	                         :response_code => 200,
+	                         :response_message => "Terms & Conditions"  ,
+	                         :description => @page.description
+	                        }
 	   else
 	   		render :json => {
                             :response_code => 500,
                             :response_message => "Page not found"                          
-                          }
+                            }
 	   end
 	end
 
@@ -53,16 +53,15 @@ class InfosController < ApplicationController
 		@page = Info.find_by_page_name("Subscription")
 		if @page
 			render :json => {
-	                    :response_code => 200,
-	                    :response_message => "Subscription"  ,
-	                    :description => @page.description
-	                  }
+	                        :response_code => 200,
+	                        :response_message => "Subscription"  ,
+	                        :description => @page.description
+	                        }
 	   else
 	   		render :json => {
                             :response_code => 500,
                             :response_message => "Page not found"                          
-                          }
+                            }
 	   end
-
-	end
+    end
 end

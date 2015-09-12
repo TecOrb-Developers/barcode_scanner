@@ -63,6 +63,7 @@ class PreventivesController < ApplicationController
 			  @msg = "Please provide user type"
 			end
 			if @user.present?
+				
 				if (@preventive.user_id == params[:user_id] and params[:user_type]=="user") or (@preventive.member_id == params[:user_id] and params[:user_type] == "member")
 					@preventive.destroy
 					@m ="Preventive removed successfully"

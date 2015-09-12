@@ -17,7 +17,7 @@ class MembersController < ApplicationController
 	                        }
 			end
 		else
-			render :json => {
+			render :json =>  {
 	        	                :response_code => 500,
 	        	                :response_message => "User does not exists."        	               
 	        	              }
