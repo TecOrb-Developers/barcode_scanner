@@ -27,11 +27,19 @@ class MembersController < ApplicationController
 	def manage_profile
 		@user = User.find_by_id(params[:user_id])
 		if @user
-			@members = @user.members
+			@member =[]
+			@user.members.each do |m|
+				@mem={}
+				@mem["id"]=m.id
+				@mem["name"]=m.name
+				@mem["image"]=m.image.url
+				@mem["dob"]=m.dob
+				@member << @mem
+			end
 			 render :json => {
 	        	                :response_code => 200,
 	        	                :response_message => "Member Lists"  ,
-	        	                :member => @members.as_json(:only=>[:id,:name,:image,:dob])     	               
+	        	                :member => @member     	               
 	        	              }
 		else
 			render :json => {
