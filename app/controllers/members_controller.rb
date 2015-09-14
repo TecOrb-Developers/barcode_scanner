@@ -55,7 +55,7 @@ class MembersController < ApplicationController
 			 render :json => {
 	        	                :response_code => 200,
 	        	                :response_message => "Member Lists"  ,
-	        	                :member => @member.as_json(:only=>[:id,:name,:dob]).merge!(image: @member.image.url),
+	        	                :user => @member.as_json(:only=>[:id,:name,:dob]).merge!(image: @member.image.url),
 	        	                :preventives => @member.preventives.as_json(only:[:id,:name])  
 	        	                   	               
 	        	              }
