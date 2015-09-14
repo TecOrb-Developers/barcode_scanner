@@ -55,6 +55,7 @@ require 'uri'
 				@member = {}
 				@member["id"] = m.id
 				@member["name"] = m.name
+				@member["image"]=m.image.url
 				@matching = ingredients_match_algo(m,@response["ingredients"])
 				if @matching == "safe"
 				  @member["state"] = "You can eat." 
@@ -71,6 +72,7 @@ require 'uri'
 			end
 			@user_result = {}
 			@user_result["name"] = user.name
+			@user_result["image"]= user.image.url
 			@match = ingredients_match_algo(user,@response["ingredients"])
 			if @match == "safe"
 				@user_result["state"]="You can eat." 

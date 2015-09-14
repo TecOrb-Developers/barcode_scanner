@@ -25,7 +25,7 @@ class PreventivesController < ApplicationController
 					   render :json => {
 	                          :response_code => 200,
 	                          :response_message => @msg,
-	                          :user => @user.as_json(:only=>[:id,:name,:image,:dob]),
+	                          :user => @user.as_json(:only=>[:id,:name,:dob]).merge!(image: @user.image.url),
 	                          :preventives =>  @user.preventives.as_json(:only =>[:id,:name])                  
 	                          }
 	               else
@@ -82,11 +82,11 @@ class PreventivesController < ApplicationController
 		                        :response_message => @msg                         
 		                      }
 			end			  	
-		else
+		 else
 			render :json => {
 		                        :response_code => 500,
 		                        :response_message => "preventive does not exists."                         
 		                    }
 		end
 	end
- end
+end
