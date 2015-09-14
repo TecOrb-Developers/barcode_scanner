@@ -137,21 +137,30 @@ class UsersController < ApplicationController
   def recent_searched_product
       @user = User.find_by_id(params[:user_id])
       @histroy = ScanHistory.order(created_at: :desc)
-   if @user.present? and @user.scan_histories.present?
-      @scan_histories =@user.scan_histories.first(5)
+   if @user.present?
+     if @user.scan_histories.present?
+      @scan_histories =@user.scan_histories.first(5).uniq{|p|p.product_name}
       render :json => {
                             :response_code => 200,
                             :response_message => "Recently searched product fetched successfully" ,
                             :scan_histroy => @scan_histories.as_json(:only=>[:product_name,:image])                          
                           }
-  else
+   else
       render :json => {
                             :response_code => 500,
+                            :response_message =>"No search found"                        
+                      } 
+       end               
+  else
+     render :json => {
+                            :response_code => 500,
                             :response_message =>"Sorry! User id does not exists"                        
-                      }    
+                      } 
 
-    end
+
+    
  end
+end 
 
 	private
 	def users_params
