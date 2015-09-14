@@ -8,7 +8,7 @@ class MembersController < ApplicationController
 			  render :json => {
 	        	                :response_code => 200,
 	        	                :response_message => "Member added successfully."  ,
-	        	                :member => @member.as_json(:only=>[:id,:name,:image,:dob])     	               
+	        	                :member => @member.as_json(:only=>[:id,:name,:dob]).merge!(image: @member.image.url)     	               
 	        	              }
 	        else
 	       	 render :json => {
