@@ -58,7 +58,8 @@ require 'uri'
 				@member["image"]=m.image.url
 				@matching = ingredients_match_algo(m,@response["ingredients"])
 				if @matching == "safe"
-				  @member["state"] = "You can eat." 
+				  @member["state"] = "You can eat."
+
 				elsif @matching == "not ingredients"
 				   	@member["state"] = "Ingredients of the product are not available, thats why we are not sure about product"
 				    @scan_state = "not sure"
