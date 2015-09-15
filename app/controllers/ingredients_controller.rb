@@ -38,7 +38,7 @@ class IngredientsController < ApplicationController
 	                         :response_message => "Result is successfully fetched",
 	                         :product_name=>@result["product"]["product_name"],
 	                         :image=> @result["product"]["image"].first,
-	                         :ingredients => @result["product"]["ingredients"],	                
+	                         :ingredients => @result["product"]["ingredients"].present? ? @result["ingredients"] : [],                
 	                         :user_result => @result["user_result"],
 	                         :members_result => @result["members_result"]
 	    	                }
