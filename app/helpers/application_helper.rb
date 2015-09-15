@@ -76,11 +76,14 @@ require 'uri'
 			@user_result["name"] = user.name
 			@user_result["image"]= user.image.url
 			@match = ingredients_match_algo(user,@response["ingredients"])
+
 			if @match == "safe"
 				@user_result["state"]="You can eat." 
+				@user_result["harmful_ingredients"]=[]
 			elsif @match == "not ingredients"
 				@user_result["state"] = "Ingredients of the product are not available, thats why we are not sure about product"
 				@scan_state = "not sure"
+				@user_result["harmful_ingredients"]=[]
 			else
 			    @user_result["state"]="Do not eat." 
 			    @user_result["harmful_ingredients"]=@match
