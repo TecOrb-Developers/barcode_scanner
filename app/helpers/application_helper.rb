@@ -10,6 +10,7 @@ require 'uri'
 		@data = {}
 		if JSON.parse(@response.body)["response"]["data"].first.present?  
             @data["ingredients"]=JSON.parse(@response.body)["response"]["data"].first["ingredients"]
+            p "----------------------------#{@data["ingredients"]}"
             @data["product_name"]=JSON.parse(@response.body)["response"]["data"].first["product_name"]
             @data["image"]= JSON.parse(@response.body)["response"]["data"].first["image_urls"]	     
             @data   	                

@@ -33,6 +33,7 @@ class IngredientsController < ApplicationController
 	  			@r = "safe"
 	  		end
 	  		scan_history = @user.scan_histories.create(:product_name => @result["product"]["product_name"],:result =>@r,:unsafe_users => @result["unsafe_users"],:history_type => "scan",:image => @result["product"]["image"].first)
+	        p "*****************************#{@result["product"]["ingredients"]}"
 	        render :json => {
 	                         :response_code => 200,
 	                         :response_message => "Result is successfully fetched",
