@@ -20,7 +20,8 @@ class UsersController < ApplicationController
                        }
       end                 
     
-     elsif params[:signup_type]=="facebook" or params[:signup_type]=="google"
+    elsif params[:signup_type]=="facebook" or params[:signup_type]=="google" 
+      p "----------------------------"
            @user = SocialAuthentication.user_authentication_from_socialmedia(params[:provider_name],params[:provider_id],params[:email])
            if @user
              render :json => {                         
