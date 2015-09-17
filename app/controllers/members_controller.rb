@@ -2,7 +2,9 @@ class MembersController < ApplicationController
 
 	def add_member
 		@user = User.find_by_id(params[:user_id])
-		if @user
+		@member = @user.members.count
+		if @member < 8 
+		 if @user
 			@member = @user.members.create(name: params[:name],dob: params[:dob],image: params[:image])
 			if @member.id != nil
 			  render :json => {
@@ -22,7 +24,13 @@ class MembersController < ApplicationController
 	        	                :response_message => "User does not exists."        	               
 	        	              }
 		end
+	 else
+     render :json =>  {
+	        	                :response_code => 500,
+	        	                :response_message => "Sorry! you can't add more than 8 members "        	               
+	        	              }
 	end
+end	
 
 	def manage_profile
 		@user = User.find_by_id(params[:user_id])
