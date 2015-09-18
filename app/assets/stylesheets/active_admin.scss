@@ -7,9 +7,9 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
-$skinMainFirstColor: #191919!default;
- //$skinMainSecondColor:#FF4500!default;
-// $skinBorderWindowColor: #FF4500!default;
+$skinMainFirstColor:#FF4500!default;
+$skinMainSecondColor:#008000!default;
+$skinBorderWindowColor:#008000!default;
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
@@ -18,7 +18,7 @@ $skinMainFirstColor: #191919!default;
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
-//   .status_tag { background: #FF4500; }
+//   .status_tag { background: #DAA520; }
 
 
 .test input {
@@ -30,4 +30,3 @@ $skinMainFirstColor: #191919!default;
     vertical-align: middle !important;
 }
 
- 

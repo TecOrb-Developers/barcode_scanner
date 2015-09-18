@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917041906) do
+ActiveRecord::Schema.define(version: 20150917135632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,18 @@ ActiveRecord::Schema.define(version: 20150917041906) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "chefs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "restaurant_owner_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "image"
+    t.string   "phone"
+  end
+
+  add_index "chefs", ["restaurant_owner_id"], name: "index_chefs_on_restaurant_owner_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -100,6 +112,27 @@ ActiveRecord::Schema.define(version: 20150917041906) do
   add_index "preventives", ["member_id"], name: "index_preventives_on_member_id", using: :btree
   add_index "preventives", ["user_id"], name: "index_preventives_on_user_id", using: :btree
 
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "restaurant_owner_id"
+    t.integer  "chef_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "products", ["chef_id"], name: "index_products_on_chef_id", using: :btree
+  add_index "products", ["restaurant_owner_id"], name: "index_products_on_restaurant_owner_id", using: :btree
+
+  create_table "restaurant_owners", force: :cascade do |t|
+    t.string   "name"
+    t.string   "restaurant_name"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "image"
+    t.string   "phone"
+  end
+
   create_table "scan_histories", force: :cascade do |t|
     t.string   "product_name"
     t.string   "result"
@@ -142,10 +175,13 @@ ActiveRecord::Schema.define(version: 20150917041906) do
     t.float    "dob"
   end
 
+  add_foreign_key "chefs", "restaurant_owners"
   add_foreign_key "devices", "users"
   add_foreign_key "members", "users"
   add_foreign_key "preventives", "members"
   add_foreign_key "preventives", "users"
+  add_foreign_key "products", "chefs"
+  add_foreign_key "products", "restaurant_owners"
   add_foreign_key "scan_histories", "users"
   add_foreign_key "social_authentications", "users"
 end

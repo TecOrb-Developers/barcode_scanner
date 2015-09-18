@@ -1,19 +1,19 @@
 class SessionsController < ApplicationController
    
    def log_in
-   	 user = User.find_by_email(params[:email])
+   	 user = User.find_by_name(params[:name])
       if user 
         if user.confirmation_token.nil? 
           if user.authenticate(params[:password])
             render :json => { :response_code => 200,:user=>user.as_json(:only =>[:id]),:response_message =>"You have successfully logged In"}
           else
-            render :json => { :response_code => 500,:response_message =>"Email or password is invalid"}
+            render :json => { :response_code => 500,:response_message =>"User name or password is invalid"}
            end
          else
             render :json => { :response_code => 500,:response_message =>"Your account is not verified yet, Please login to your registered email id and visit the link to verify your account."}
          end
        else
-            render :json => { :response_code => 500,:response_message =>"Email does not exist"}
+            render :json => { :response_code => 500,:response_message =>"User name does not exist"}
       end
     end
    

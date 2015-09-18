@@ -237,6 +237,7 @@ DEPENDENCIES
   factual-api
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-ui-rails
   oauth
   pg
   rails (= 4.2.1)

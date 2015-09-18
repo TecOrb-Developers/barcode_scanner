@@ -18,7 +18,7 @@ gem 'factual-api'
 gem 'active_admin_theme'
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
-
+gem 'jquery-ui-rails'
 
 
 # Use jquery as the JavaScript library
