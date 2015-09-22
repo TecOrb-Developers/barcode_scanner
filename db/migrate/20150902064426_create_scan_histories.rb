@@ -3,6 +3,8 @@ class CreateScanHistories < ActiveRecord::Migration
     create_table :scan_histories do |t|
       t.string :product_name
       t.string :result
+      t.string :image
+      t.string :history_type
       t.string :unsafe_users, array: true, default: []
       t.references :user, index: true, foreign_key: true
 

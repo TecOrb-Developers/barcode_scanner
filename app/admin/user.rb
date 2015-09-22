@@ -10,7 +10,7 @@ index do
     selectable_column
     column 'UserName',:name
     column :email
-    column :dob 
+    column :dob
     actions
   end
 form do |f|

@@ -33,7 +33,6 @@ class IngredientsController < ApplicationController
 	  			@r = "safe"
 	  		end
 	  		scan_history = @user.scan_histories.create(:product_name => @result["product"]["product_name"],:result =>@r,:unsafe_users => @result["unsafe_users"],:history_type => "scan",:image => @result["product"]["image"].first)
-	        p "*****************************#{@result["product"]["ingredients"]}"
 	        render :json => {
 	                         :response_code => 200,
 	                         :response_message => "Result is successfully fetched",
@@ -124,5 +123,12 @@ class IngredientsController < ApplicationController
  def upload_file                
  	  Ingredient.upload_file(params[:file][:file])
  	  redirect_to :back
+ end
+
+ def product_ingredient_list
+ 	p "--------------#{params.inspect}"
+ 	@product = Product.find_by_id(params[:product_id])
+ 	@product_ingredient = @product.product_ingredients.map{|ingredient| ingredient.attributes.merge(ingredient_name: ingredient.ingredient.ingredient_name)}
+ 	render json:  { :product_ingredient => @product_ingredient } 
  end
 end

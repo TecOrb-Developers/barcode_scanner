@@ -1,4 +1,7 @@
 class Ingredient < ActiveRecord::Base
+	has_many :product_ingredient
+    has_many :product, through: :product_ingredient
+
 	def self.upload_file(file)
 		p "-----------------#{self.inspect}"
 	  	CSV.foreach(file.path) do |row|

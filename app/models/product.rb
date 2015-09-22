@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
-  belongs_to :restaurant_owner
+  belongs_to :restaurant
   belongs_to :chef
- #scope :details, -> {Product.where(restaurant_owner_id: params[:id])}
+  has_many :product_ingredients
+  has_many :ingredients, through: :product_ingredients
 end

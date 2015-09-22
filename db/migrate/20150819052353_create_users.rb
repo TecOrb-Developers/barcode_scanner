@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.date   :dob
+      t.string :image 
       t.string :password_digest
       t.string :user_type
       t.string :confirmation_token
@@ -12,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_reset_token
       t.datetime :password_reset_token_sent_at
       t.datetime :password_confirmed_at
+      t.string :signup_type
       t.boolean :status
       t.timestamps null: false
     end

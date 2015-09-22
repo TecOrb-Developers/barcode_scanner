@@ -15,6 +15,32 @@
 //= require turbolinks
 //=require jquery-ui
 //= require_tree .
+
+
+
 $(function() {
     $( "#datepicker" ).datepicker();
   });
+
+$(document).ready(function(){
+	alert("jsss");
+  // $("select[id='offer_category_id']").on("change", function () { 
+  //     var value = $(this).val();     
+  //     $.ajax({
+  //         type: "GET",
+  //         url: "/offers/get_subcategory",
+  //         data:{ category_id: value  },
+  //         dataType: "json",
+  //         success:function(data){
+  //           //alert(JSON.stringify(data.subcategory));      
+  //           {
+  //             var html = "";
+  //              $.each(data.subcategory,function(i, value ) {
+  //                html += "<option value="+value.id+">"+value.title+"</option>"
+  //              });          
+  //              $("#offer_sub_category_id").html(html);
+  //           }                  
+  //         }
+  //       });
+  //   }); 
+};

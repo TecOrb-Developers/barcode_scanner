@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RestaurantOwnerTest < ActiveSupport::TestCase
+class ProductIngredientTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

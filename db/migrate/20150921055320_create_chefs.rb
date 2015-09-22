@@ -3,8 +3,9 @@ class CreateChefs < ActiveRecord::Migration
     create_table :chefs do |t|
       t.string :name
       t.string :email
-      t.integer :phone
-      t.references :restaurant_owner, index: true, foreign_key: true
+      t.string :image
+      t.string :phone
+      t.references :restaurant, index: true, foreign_key: true
 
       t.timestamps null: false
     end

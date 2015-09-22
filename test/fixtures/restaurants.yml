@@ -4,10 +4,12 @@ one:
   name: MyString
   restaurant_name: MyString
   email: MyString
-  phone: 1
+  image: MyString
+  phone: MyString
 
 two:
   name: MyString
   restaurant_name: MyString
   email: MyString
-  phone: 1
+  image: MyString
+  phone: MyString

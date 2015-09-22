@@ -1,4 +1,5 @@
 class Chef < ActiveRecord::Base
-  belongs_to :restaurant_owner
-  has_many :products, dependent: :destroy
+  belongs_to :restaurant
+  has_many :products
+  mount_uploader :image, AvatarUploader
 end

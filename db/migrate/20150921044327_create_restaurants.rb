@@ -1,10 +1,11 @@
-class CreateRestaurantOwners < ActiveRecord::Migration
+class CreateRestaurants < ActiveRecord::Migration
   def change
-    create_table :restaurant_owners do |t|
+    create_table :restaurants do |t|
       t.string :name
       t.string :restaurant_name
       t.string :email
-      t.integer :phone
+      t.string :image
+      t.string :phone
 
       t.timestamps null: false
     end

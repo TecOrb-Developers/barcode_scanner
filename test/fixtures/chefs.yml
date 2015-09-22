@@ -3,11 +3,13 @@
 one:
   name: MyString
   email: MyString
-  phone: 1
-  restaurant_owner_id: 
+  image: MyString
+  phone: MyString
+  restaurant_id: 
 
 two:
   name: MyString
   email: MyString
-  phone: 1
-  restaurant_owner_id: 
+  image: MyString
+  phone: MyString
+  restaurant_id: 

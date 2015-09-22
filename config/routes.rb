@@ -39,6 +39,7 @@ post '/select_searched_product' => "ingredients#select_searched_product"
 post '/scan_history'=>"users#scan_history"
 post '/recent_searched_product' => "users#recent_searched_product"
 post '/scan_result'=>"preventives#scan_result"
+get  '/product_ingredient_list' => "ingredients#product_ingredient_list"
 # post '/member_preventives'=>"members#member_preventives"
 # post '/user_preventives'=>"users#user_preventives"
 
